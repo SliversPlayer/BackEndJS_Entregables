@@ -1,0 +1,11 @@
+[
+  {
+    "id": 2,
+    "title": "Pantalón",
+    "description": "Pantalón vaquero",
+    "price": 29.99,
+    "thumbnail": "img/pantalon.jpg",
+    "code": "P002",
+    "stock": 50
+  }
+]
