@@ -3,27 +3,27 @@
     "id": 1,
     "title": "Pantalón",
     "description": "Pantalón vaquero",
-    "price": 29.99,
+    "price": 25.99,
     "thumbnail": "img/pantalon.jpg",
-    "code": "P002",
-    "stock": 50
+    "code": "P001",
+    "stock": 3
   },
   {
     "id": 2,
     "title": "blusa",
-    "description": "Pantalón vaquero",
+    "description": "blusa azul",
     "price": 29.99,
-    "thumbnail": "img/pantalon.jpg",
+    "thumbnail": "img/blusa.jpg",
     "code": "P002",
-    "stock": 50
+    "stock": 20
   },
   {
     "id": 3,
     "title": "Chaleco",
-    "description": "Pantalón vaquero",
-    "price": 29.99,
-    "thumbnail": "img/pantalon.jpg",
-    "code": "P002",
-    "stock": 50
+    "description": "chaleco de lana",
+    "price": 35.9,
+    "thumbnail": "img/chaleco.jpg",
+    "code": "P003",
+    "stock": 12
   }
 ]
