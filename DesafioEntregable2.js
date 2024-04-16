@@ -1,4 +1,4 @@
-// Entregable 2
+// Entregable 3
 // Consigna
 // Realizar una clase de nombre “ProductManager”, el cual permitirá trabajar con múltiples productos.
 // Éste debe poder agregar, consultar, modificar y eliminar un producto y manejarlo en persistencia 
