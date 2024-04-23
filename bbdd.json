@@ -26,4 +26,13 @@
     "code": "P003",
     "stock": 12
   }
+  {
+    "id": 4,
+    "title": "Peluca",
+    "description": "Peluquin",
+    "price": 5.9,
+    "thumbnail": "img/Peluca.jpg",
+    "code": "P004",
+    "stock": 5
+  }
 ]
