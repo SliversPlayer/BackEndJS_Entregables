@@ -24,7 +24,7 @@
     "price": 35.9,
     "thumbnail": "img/chaleco.jpg",
     "code": "P003",
-    "stock": 12
+    "stock": 100
   },
   {
     "id": 4,
@@ -34,5 +34,14 @@
     "thumbnail": "img/Peluca.jpg",
     "code": "P004",
     "stock": 5
+  },
+  {
+    "id": 5,
+    "title": "Nuevo Producto",
+    "description": "Descripción del nuevo producto",
+    "price": 19.99,
+    "thumbnail": "NP001",
+    "code": 10,
+    "stock": "Electrónicos"
   }
 ]

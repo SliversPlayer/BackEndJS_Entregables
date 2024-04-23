@@ -2,7 +2,7 @@
   "name": "entregables",
   "version": "1.0.0",
   "description": "",
-  "main": "DesafioEntregable4.js",
+  "main": "PreEntrega1.js",
   "scripts": {
     "start": "node --watch app.js"
   },
