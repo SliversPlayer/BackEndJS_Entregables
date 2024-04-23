@@ -1,35 +1,21 @@
 const express = require('express');
-const productManager = require('./DesafioEntregable3.js');
+const productManager = require('./PreEntrega1.js');
+const cartManager = require('./PreEntrega1_cart.js');
 
 const app = express();
-const PORT = 3000
+const PORT = 8080;
 
 // Middleware para manejar JSON
 app.use(express.json());
 
-// Ruta para obtener todos los productos
-app.get('/products', (req, res) => {
-    const limit = req.query.limit;
-    if (limit) {
-        const limitedProducts = productManager.getProducts().slice(0, limit);
-        res.json(limitedProducts);
-    } else {
-        res.json(productManager.getProducts());
-    }
-});
+// Rutas para manejar productos
+const productsRouter = require('./routes/products');
+app.use('/api/products', productsRouter);
 
-// Ruta para obtener un producto por su ID
-app.get('/products/:pid', (req, res) => {
-    const productId = parseInt(req.params.pid);
-    const product = productManager.getProductsById(productId);
-    if (product) {
-        res.json(product);
-    } else {
-        res.status(404).json({ message: 'Producto no encontrado' });
-    }
-});
+// Rutas para manejar carritos
+const cartsRouter = require('./routes/carts');
+app.use('/api/carts', cartsRouter);
 
 app.listen(PORT, () => {
     console.log(`Servidor Express corriendo en el puerto ${PORT}`);
 });
-
