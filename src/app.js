@@ -33,8 +33,9 @@ app.set('views', __dirname+'views');
 
 
 // Server archivos estáticos
-app.use(express.static(path.resolve(__dirname, 'public')));
 app.use('/', viewsRouter);
+app.use(express.static(__dirname + '/public'));
+
 
 // Rutas para manejar productos
 import productsRouter from './routes/products.js';
