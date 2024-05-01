@@ -4,7 +4,7 @@ import path from 'path';
 import http from 'http';
 import viewsRouter from './routes/views.router.js';
 import { Server } from 'socket.io';
-import __dirname from './utils.js';
+import __dirname from '../utils.js';
 
 /*
 import productManager from './PreEntrega1.js';
