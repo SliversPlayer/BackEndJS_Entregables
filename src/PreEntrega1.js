@@ -2,7 +2,6 @@ import express from 'express';
 import fs from 'fs';
 
 
-
 class ProductManager {
     constructor(filePath) {
         this.filePath = filePath;
@@ -89,7 +88,7 @@ class ProductManager {
     }
 }
 
-const manager = new ProductManager("bbdd.json");
+const manager = new ProductManager("./src/bbdd.json");
 manager.loadProducts();
 
 export default manager;

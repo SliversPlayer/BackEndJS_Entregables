@@ -1,6 +1,6 @@
 import express from 'express';
-import cartManager from '../src/PreEntrega1_cart.js';
-import productManager from'../src/PreEntrega1.js';
+import cartManager from '../PreEntrega1_cart.js';
+import productManager from'../PreEntrega1.js';
 
 const router = express.Router();
 

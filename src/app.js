@@ -2,9 +2,9 @@ import express from 'express';
 import handlebars from 'express-handlebars'
 import http from 'http';
 import { Server } from 'socket.io';
-import productManager from './src/PreEntrega1.js';
-import cartManager from './src/PreEntrega1_cart.js';
-import __dirname from './utils.js';
+import productManager from './PreEntrega1.js';
+import cartManager from './PreEntrega1_cart.js';
+import __dirname from '../utils.js';
 import path from 'path';
 
 // Instancia de Express y del servidor HTTP

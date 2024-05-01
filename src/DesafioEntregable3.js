@@ -87,7 +87,7 @@ class ProductManager {
     }
 }
 
-const manager = new ProductManager("bbdd.json");
+const manager = new ProductManager("./bbdd.json");
 manager.loadProducts();
 
 module.exports = manager;

@@ -60,7 +60,7 @@ class CartManager {
     }
 }
 
-const cartManager = new CartManager("cart_data.json");
+const cartManager = new CartManager("./src/cart_data.json");
 cartManager.loadCarts();
 
 export default CartManager;
