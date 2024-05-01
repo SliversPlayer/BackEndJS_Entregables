@@ -1,5 +1,5 @@
-const express = require('express');
-const productManager = require('../src/PreEntrega1.js');
+import express from 'express';
+import productManager from '../src/PreEntrega1.js';
 
 const router = express.Router();
 
@@ -58,4 +58,4 @@ router.delete('/:pid', (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

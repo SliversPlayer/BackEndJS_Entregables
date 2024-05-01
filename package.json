@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/PreEntrega1.js",
+  "type" : "module",
   "scripts": {
     "start": "node --watch app.js"
   },

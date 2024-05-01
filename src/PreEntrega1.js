@@ -1,5 +1,7 @@
-const express = require('express');
-const fs = require('fs');
+import express from 'express';
+import fs from 'fs';
+
+
 
 class ProductManager {
     constructor(filePath) {
@@ -90,6 +92,6 @@ class ProductManager {
 const manager = new ProductManager("bbdd.json");
 manager.loadProducts();
 
-module.exports = manager;
+export default manager;
 
 

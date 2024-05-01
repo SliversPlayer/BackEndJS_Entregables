@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 class CartManager {
     constructor(filePath) {
@@ -63,4 +63,4 @@ class CartManager {
 const cartManager = new CartManager("cart_data.json");
 cartManager.loadCarts();
 
-module.exports = cartManager;
+export default CartManager;

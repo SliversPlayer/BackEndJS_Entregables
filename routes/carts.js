@@ -1,6 +1,6 @@
-const express = require('express');
-const cartManager = require('../src/PreEntrega1_cart.js');
-const productManager = require('../src/PreEntrega1.js');
+import express from 'express';
+import cartManager from '../src/PreEntrega1_cart.js';
+import productManager from'../src/PreEntrega1.js';
 
 const router = express.Router();
 
@@ -40,4 +40,4 @@ router.post('/:cid/product/:pid', (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;
