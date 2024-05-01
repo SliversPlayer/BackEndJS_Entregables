@@ -1,5 +1,5 @@
 import express from 'express';
-import productManager from '../PreEntrega1.js';
+import productManager from '../ProductManager.js';
 
 const router = express.Router();
 

@@ -3,7 +3,8 @@ import express from 'express'
 const router = express.Router()
 
 router.get('/', (req,res) => {
-    res.render('index', {})
+    res.render('realTimeProducts', {})
 })
 
-export default router
+
+export default router;

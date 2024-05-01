@@ -1,33 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Real Time Products</h1>
-    <ul id="productList">
-        <!-- La lista de productos se agregará aquí dinámicamente -->
-    </ul>
+<div style="text-align: center;">
+    Aca mostramos la tabla en tiempo real con los productos agregados y los productos a agregar
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        // Conectar al servidor de WebSockets
-        const socket = io();
+</div>
+<section style="display: flex;">
+    <section style="width: 50%;">
+        <h1>Productos</h1>
+        <div>
+            <ol id="productsRealTime">
 
-        // Manejar evento para recibir actualizaciones de productos
-        socket.on('products', (products) => {
-            // Limpiar la lista de productos
-            document.getElementById('productList').innerHTML = '';
+            </ol>
+        </div>
+    </section>
+    <section style="max-width: 0%;">
+        <div>
+            <h1>Agregando Productos</h1>
 
-            // Agregar cada producto a la lista
-            products.forEach((product) => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `${product.title} - $${product.price}`;
-                document.getElementById('productList').appendChild(listItem);
-            });
-        });
-    </script>
-</body>
-</html>
+            <label for="title">Titulo</label>
+            <input type="text" name="title" id="title">
+            <label for="description">Description</label>
+            <input type="text" name="decription" id="description">
+            <label for="code"> Ingrese codigo</label>
+            <input type="text" name="code" id="code">
+            <label for="price"> Ingrese precio</label>
+            <input type="text" name="price" id="price">
+            <button type="submit" id="btn-send">Enviar</button>
+
+        </div>
+    </section>
+</section>
+
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realTimeProducts.js"></script>
