@@ -1,6 +1,6 @@
 const express = require('express');
-const cartManager = require('../PreEntrega1_cart.js');
-const productManager = require('../PreEntrega1.js');
+const cartManager = require('../src/PreEntrega1_cart.js');
+const productManager = require('../src/PreEntrega1.js');
 
 const router = express.Router();
 

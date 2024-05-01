@@ -1,5 +1,5 @@
 const express = require('express');
-const productManager = require('../PreEntrega1.js');
+const productManager = require('../src/PreEntrega1.js');
 
 const router = express.Router();
 

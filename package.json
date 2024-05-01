@@ -2,7 +2,7 @@
   "name": "entregables",
   "version": "1.0.0",
   "description": "",
-  "main": "PreEntrega1.js",
+  "main": "src/PreEntrega1.js",
   "scripts": {
     "start": "node --watch app.js"
   },

@@ -1,6 +1,6 @@
 const express = require('express');
-const productManager = require('./PreEntrega1.js');
-const cartManager = require('./PreEntrega1_cart.js');
+const productManager = require('./src/PreEntrega1.js');
+const cartManager = require('./src/PreEntrega1_cart.js');
 
 const app = express();
 const PORT = 8080;
@@ -13,7 +13,7 @@ const productsRouter = require('./routes/products');
 app.use('/api/products', productsRouter);
 
 // Rutas para manejar carritos
-const cartsRouter = require('./routes/carts');
+const cartsRouter = require('./routes/carts.js');
 app.use('/api/carts', cartsRouter);
 
 app.listen(PORT, () => {
