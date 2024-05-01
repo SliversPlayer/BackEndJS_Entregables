@@ -1,12 +1,15 @@
 import express from 'express';
-import handlebars from 'express-handlebars'
+import handlebars from 'express-handlebars';
+import path from 'path';
 import http from 'http';
-import viewsRouter from './routes/views.router.js'
+import viewsRouter from './routes/views.router.js';
 import { Server } from 'socket.io';
+import __dirname from './utils.js';
+
+/*
 import productManager from './PreEntrega1.js';
 import cartManager from './PreEntrega1_cart.js';
-import __dirname from './utils.js';
-import path from 'path';
+*/
 
 // Instancia de Express y del servidor HTTP
 const app = express();
@@ -17,21 +20,21 @@ const socketServer = new Server(server);
 
 const PORT = 8080;
 
-//Inicializar motor usando app.engine
-app.engine('handlebars', handlebars.engine());
-app.set('views', __dirname+'views');
-app.set('views engine','handlebars');
-
-// Server archivos estáticos
-app.use(express.static(path.resolve(__dirname, 'public')));
-app.use('/', viewsRouter);
-
-
 // Middleware para manejar JSON
 app.use(express.json());
 
 // Middleware para analizador datos de formularios URL-encoded
 app.use(express.urlencoded({ extended: true }));
+
+//Inicializar motor usando app.engine
+app.engine('handlebars', handlebars.engine());
+app.set('view engine','handlebars');
+app.set('views', __dirname+'views');
+
+
+// Server archivos estáticos
+app.use(express.static(path.resolve(__dirname, 'public')));
+app.use('/', viewsRouter);
 
 // Rutas para manejar productos
 import productsRouter from './routes/products.js';
