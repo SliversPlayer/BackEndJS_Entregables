@@ -1,6 +1,10 @@
 import express from 'express';
 import cartManager from '../CartManager.js';
 import productManager from'../ProductManager.js';
+import __dirname from "../../utils.js";
+import __dirname from "../../utils.js";
+import ProductManager from "../productManager.js";
+import ProductManager from "../productManager.js";
 
 const router = express.Router();
 
@@ -41,3 +45,4 @@ router.post('/:cid/product/:pid', (req, res) => {
 });
 
 export default router;
+const pm = new ProductManager(__dirname + '/');

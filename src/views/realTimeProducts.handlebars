@@ -1,35 +1,11 @@
-<div style="text-align: center;">
-    Aca mostramos la tabla en tiempo real con los productos agregados y los productos a agregar
-
+<div>
+    <input type="text" name="title" id="title" placeholder="title">
+    <input type="text" name="description" id="description" placeholder="description">
+    <input type="number" name="price" id="price" placeholder="price">
+    <input type="text" name="code" id="code" placeholder="code">
+    <input type="number" name="stock" id="stock" placeholder="stock">
+    <button type="button" id="btnEnviar">Enviar</button>
 </div>
-<section style="display: flex;">
-    <section style="width: 50%;">
-        <h1>Productos</h1>
-        <div>
-            <ol id="productsRealTime">
-
-            </ol>
-        </div>
-    </section>
-    <section style="max-width: 0%;">
-        <div>
-            <h1>Agregando Productos</h1>
-
-            <label for="title">Titulo</label>
-            <input type="text" name="title" id="title">
-            <label for="description">Description</label>
-            <input type="text" name="decription" id="description">
-            <label for="code"> Ingrese codigo</label>
-            <input type="text" name="code" id="code">
-            <label for="price"> Ingrese precio</label>
-            <input type="text" name="price" id="price">
-            <button type="submit" id="btn-send">Enviar</button>
-
-        </div>
-    </section>
-</section>
-
-
-
+<div id="listaProductos"></div>
 <script src="/socket.io/socket.io.js"></script>
-<script src="/js/realTimeProducts.js"></script>
+<script src="/js/realtime.js"></script>

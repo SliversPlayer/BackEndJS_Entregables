@@ -1,96 +1,119 @@
-import express from 'express';
-import fs from 'fs';
-
+import fs from "fs/promises";
 
 class ProductManager {
-    constructor(filePath) {
-        this.filePath = filePath;
-        this.products = [];
+  #path;
+
+  constructor(path) {
+    //this.#createFile(path);
+    this.#path = path;
+  }
+
+  async #createFile(path) {
+    try {
+      await fs.writeFile(path, JSON.stringify([]));
+      console.log(`Archivo '${path}' creado con éxito!`);
+    } catch (error) {
+      return console.log(`No se pudo crear el archivo con nombre: ${path}`);
+    }
+  }
+
+  async addProduct(code, title, description, price, thumbnail, stock) {
+    let id;
+
+    if (!code) throw Error("Debe incluir el campo code");
+    if (!title) throw Error("Debe incluir el campo title");
+    if (!description) throw Error("Debe incluir el campo description");
+    if (isNaN(price)) throw Error("Debe incluir el campo price");
+    if (price < 1) throw Error("El precio debe ser mayor a 1");
+    if (isNaN(stock)) throw Error("Debe incluir el campo stock");
+    if (stock < 1) throw Error("El stock debe ser mayor a 1");
+
+    const productos = await this.getProducts();
+
+    id = productos.length === 0 ? 1 : productos[productos.length - 1].id + 1;
+    productos.push({ id, title, description, price, thumbnail, code, stock, status: true });
+
+    await fs.writeFile(this.#path, JSON.stringify(productos, null, 3));
+  }
+
+  async getProducts() {
+    let productos;
+    try {
+      productos = await fs.readFile(this.#path, "utf-8");
+      return JSON.parse(productos);
+    } catch (error) {
+      return [];
+    }
+  }
+
+  async getProductById(id) {
+    const productos = await this.getProducts();
+    if (isNaN(id)) throw new Error("El pid indicado es incorrecto");
+    const item = productos.find((product) => product.id == id);
+    if (item) return item;
+    else throw new Error("Producto no encontrado");
+  }
+
+  async updateProduct(id, obj = null, campo, valor) {
+    let objetoNuevo;
+    const productos = await this.getProducts();
+    const itemPosition = productos.findIndex((product) => product.id === id);
+
+    if (itemPosition === -1) {
+      throw new Error("No se encontró el producto para actualizar");
     }
 
-    loadProducts() {
-        try {
-            const data = fs.readFileSync(this.filePath, 'utf8');
-            this.products = JSON.parse(data);
-            console.log("BD de Productos: ", data);
-        } catch (error) {
-            this.products = [];
-            console.log("Error al cargar base de datos", error);
-        }
+    switch (campo) {
+      case "title":
+        objetoNuevo = { ...productos[itemPosition], title: valor };
+        productos[itemPosition] = objetoNuevo;
+        break;
+
+      case "description":
+        objetoNuevo = { ...productos[itemPosition], description: valor };
+        productos[itemPosition] = objetoNuevo;
+        break;
+
+      case "price":
+        objetoNuevo = { ...productos[itemPosition], price: valor };
+        productos[itemPosition] = objetoNuevo;
+        break;
+
+      case "thumbnail":
+        objetoNuevo = { ...productos[itemPosition], thumbnail: valor };
+        productos[itemPosition] = objetoNuevo;
+        break;
+
+      case "code":
+        objetoNuevo = { ...productos[itemPosition], code: valor };
+        productos[itemPosition] = objetoNuevo;
+        break;
+
+      case "stock":
+        objetoNuevo = { ...productos[itemPosition], stock: valor };
+        productos[itemPosition] = objetoNuevo;
+        break;
+
+      case undefined:
+        productos[itemPosition] = { ...productos[itemPosition], ...obj };
+        break;
+    }
+    await fs.writeFile(this.#path, JSON.stringify(productos, null, 3));
+  }
+
+  async deleteProduct(id) {
+    let productos = await this.getProducts();
+    const itemPosition = productos.findIndex((product) => product.id == id);
+
+    if (itemPosition === -1) {
+      throw new Error("No se encontró el producto a eliminar");
     }
 
-    saveProducts() {
-        const data = JSON.stringify(this.products, null, 2);
-        try {
-            fs.writeFileSync(this.filePath, data);
-            console.log("Producto agregado exitosamente.");
-        } catch (error) {
-            console.log("Error al agregar el producto.", error);
-        }
-    }
-
-    addProduct(title, description, price, thumbnail, code, stock) {
-        if (!title || !description || !price || !thumbnail || !code || !stock) {
-            console.log("Todos los campos son obligatorios.");
-            return;
-        }
-
-        if (this.products.some(product => product.code === code)) {
-            console.log("El código de producto ya existe.");
-            return;
-        }
-
-        const id = this.products.length + 1;
-        const product = {
-            id,
-            title,
-            description,
-            price,
-            thumbnail,
-            code,
-            stock
-        };
-        this.products.push(product);
-        this.saveProducts();
-    }
-
-    getProducts() {
-        return this.products;
-    }
-
-    getProductsById(id) {
-        const product = this.products.find(product => product.id === id);
-        if (!product) {
-            console.log("Not found");
-            return;
-        }
-        return product;
-    }
-
-    updateProduct(id, updatedFields) {
-        const index = this.products.findIndex(product => product.id === id);
-        if (index !== -1) {
-            this.products[index] = { ...this.products[index], ...updatedFields };
-            this.saveProducts();
-            return true;
-        }
-        return false;
-    }
-
-    deleteProduct(id) {
-        const index = this.products.findIndex(product => product.id === id)
-        if (index !== -1) {
-            this.products.splice(index, 1);
-            this.saveProducts();
-            return true;
-        }
-        return false;
-    }
+    productos = productos.filter((prod) => prod.id != id);
+    await fs.writeFile(this.#path, JSON.stringify(productos, null, 3));
+  }
 }
 
-const manager = new ProductManager("./src/bbdd.json");
-manager.loadProducts();
-
-export default manager;
+export default ProductManager;
 
 

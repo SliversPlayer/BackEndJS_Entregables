@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 //Inicializar motor usando app.engine
 app.engine('handlebars', handlebars.engine());
 app.set('view engine','handlebars');
-app.set('views', __dirname+'views');
+app.set('views', __dirname+'/src/views');
 
 
 // Server archivos estáticos
