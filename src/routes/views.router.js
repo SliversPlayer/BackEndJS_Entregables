@@ -1,5 +1,5 @@
 import express from 'express';
-import ProductManager from '../productManager.js'
+import ProductManager from '../ProductManager.js'
 import __dirname from '../../utils.js';
 
 const pm=new ProductManager(__dirname+'../bbdd.json')
@@ -7,7 +7,7 @@ const router = express.Router();
 const app = express();
 
 router.get('/', (req, res) => {
-    const productos= pm.getProductsView()
+    const productos= pm.getProducts()
     res.render('index', {productos});
 });
 

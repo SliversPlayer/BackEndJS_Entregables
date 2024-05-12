@@ -6,10 +6,6 @@ import viewsRouter from '../src/routes/views.router.js';
 import { Server } from 'socket.io';
 import __dirname from '../utils.js';
 
-/*
-import productManager from './PreEntrega1.js';
-import cartManager from './PreEntrega1_cart.js';
-*/
 
 // Instancia de Express y del servidor HTTP
 const app = express();
@@ -31,11 +27,9 @@ app.engine('handlebars', handlebars.engine());
 app.set('view engine','handlebars');
 app.set('views', __dirname+'/src/views');
 
-
 // Server archivos estáticos
 app.use('/', viewsRouter);
 app.use(express.static(__dirname + '/public'));
-
 
 // Rutas para manejar productos
 import productsRouter from './routes/products.js';

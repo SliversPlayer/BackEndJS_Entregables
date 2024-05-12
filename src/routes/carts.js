@@ -1,10 +1,8 @@
 import express from 'express';
 import cartManager from '../CartManager.js';
-import productManager from'../ProductManager.js';
 import __dirname from "../../utils.js";
-import __dirname from "../../utils.js";
-import ProductManager from "../productManager.js";
-import ProductManager from "../productManager.js";
+import ProductManager from "../ProductManager.js";
+
 
 const router = express.Router();
 
