@@ -1,18 +1,20 @@
-import express from 'express';
+
+import { Router } from 'express';
 import ProductManager from '../ProductManager.js'
-import __dirname from '../../utils.js';
+import { __dirname } from "../../utils.js"
 
-const pm=new ProductManager(__dirname+'../bbdd.json')
-const router = express.Router();
-const app = express();
+const pm=new ProductManager(__dirname+'/src/bbdd.json')
+const routerV = Router()
+//Para verificar la correcta ruta
+//console.log(__dirname + '/src/bbdd.json');
 
-router.get('/', (req, res) => {
-    const productos= pm.getProducts()
-    res.render('index', {productos});
-});
+routerV.get("/",async(req,res)=>{
+    const listadeproductos=await pm.getProductsView()
+    res.render("home",{listadeproductos})
+})
 
-router.get('/realTimeProducts', (req, res) => {
-    res.render('realTimeProducts', {});
-});
+routerV.get("/realtimeproducts",(req,res)=>{
+res.render("realtimeproducts")
+})
 
-export default router;
+export default routerV

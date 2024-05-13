@@ -5,7 +5,7 @@ import { engine } from 'express-handlebars';
 
 
 const app = express();
-const productMngr = new ProductManager("./productos.json");
+const productMngr = new ProductManager("../bbdd.json");
 
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');

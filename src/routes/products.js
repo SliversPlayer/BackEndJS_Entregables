@@ -1,6 +1,7 @@
 import express from 'express';
-import productManager from '../ProductManager.js';
+import ProductManager from '../ProductManager.js';
 
+const productManager = new ProductManager();
 const router = express.Router();
 
 // Ruta para obtener todos los productos

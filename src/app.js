@@ -1,10 +1,9 @@
 import express from 'express';
 import handlebars from 'express-handlebars';
-import path from 'path';
 import http from 'http';
 import viewsRouter from '../src/routes/views.router.js';
 import { Server } from 'socket.io';
-import __dirname from '../utils.js';
+import { __dirname } from "../utils.js"
 
 
 // Instancia de Express y del servidor HTTP
@@ -36,9 +35,10 @@ import productsRouter from './routes/products.js';
 app.use('/api/products', productsRouter);
 
 // Rutas para manejar carritos
+/*
 import cartsRouter from './routes/carts.js';
 app.use('/api/carts', cartsRouter);
-
+*/
 // Escuchar eventos de conexión de Socket.IO
 socketServer.on('connection', (socket) => {
     console.log('Un cliente se ha conectado');
@@ -61,4 +61,7 @@ socketServer.on('connection', (socket) => {
 
 app.listen(PORT, () => {
     console.log(`Servidor Express corriendo en el puerto ${PORT}`);
+    console.log(`http://localhost:8080/`);
+    console.log(`http://localhost:8080/products/`);
+    console.log(`http://localhost:8080/api/products/`);
 });
