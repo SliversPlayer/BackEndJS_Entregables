@@ -14,7 +14,7 @@ routerV.get("/",async(req,res)=>{
 })
 
 routerV.get("/realtimeproducts",(req,res)=>{
-res.render("realtimeproducts")
-})
-
-export default routerV
+    res.render("realtimeproducts")
+    })
+    
+    export default routerV

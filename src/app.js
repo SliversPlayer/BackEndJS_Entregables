@@ -1,17 +1,45 @@
 import express from 'express';
 import handlebars from 'express-handlebars';
-import http from 'http';
-import viewsRouter from '../src/routes/views.router.js';
-import { Server } from 'socket.io';
 import { __dirname } from "../utils.js"
+import { Server } from 'socket.io';
+
+import productRoutes from '../src/routes/products.router.js';
+import viewsRouter from '../src/routes/views.router.js';
+import socketProducts from "./listener/socketProducts.js"
+
+const app = express()
+const PORT=8080
+
+app.use(express.static(__dirname + "/public"))
+//handlebars
+app.engine("handlebars",handlebars.engine())
+app.set("views", __dirname+"/src/views")
+app.set("view engine","handlebars")
+//rutas
+app.use("/api",productRoutes)
+app.use('/', viewsRouter)
 
 
+const httpServer=app.listen(PORT, () => {
+    try {
+        console.log(`Listening to the port ${PORT}\nAcceder a:`)
+        console.log(`\t1). http://localhost:${PORT}`)
+        console.log(`\t2). http://localhost:${PORT}/realTimeProducts/`)
+
+    }
+    catch (err) {
+        console.log(err)
+    }
+})
+
+const socketServer = new Server(httpServer)
+
+socketProducts(socketServer)
+
+/*
 // Instancia de Express y del servidor HTTP
 const app = express();
 const server = http.createServer(app);
-
-// Configura el servidor de Socket.IO
-const socketServer = new Server(server);
 
 const PORT = 8080;
 
@@ -28,40 +56,19 @@ app.set('views', __dirname+'/src/views');
 
 // Server archivos estáticos
 app.use('/', viewsRouter);
+app.use("/api",productRoutes)
 app.use(express.static(__dirname + '/public'));
 
-// Rutas para manejar productos
-import productsRouter from './routes/products.js';
-app.use('/api/products', productsRouter);
-
-// Rutas para manejar carritos
-/*
-import cartsRouter from './routes/carts.js';
-app.use('/api/carts', cartsRouter);
-*/
 // Escuchar eventos de conexión de Socket.IO
-socketServer.on('connection', (socket) => {
-    console.log('Un cliente se ha conectado');
-    
-    // Lógica para emitir los productos al cliente cuando se conecta
-    socket.emit('products', manager.getProducts());
-
-    // Manejar evento para agregar un nuevo producto
-    socket.on('addProduct', (product) => {
-        manager.addProduct(product.title, product.description, product.price, product.thumbnail, product.code, product.stock);
-        socketServer.emit('products', manager.getProducts());
-    });
-
-    // Manejar evento para eliminar un producto
-    socket.on('deleteProduct', (productId) => {
-        manager.deleteProduct(productId);
-        socketServer.emit('products', manager.getProducts());
-    });
-});
-
 app.listen(PORT, () => {
     console.log(`Servidor Express corriendo en el puerto ${PORT}`);
     console.log(`http://localhost:8080/`);
-    console.log(`http://localhost:8080/products/`);
-    console.log(`http://localhost:8080/api/products/`);
+    console.log(`http://localhost:8080/realTimeProducts/`);
 });
+
+
+// Configura el servidor de Socket.IO
+const socketServer = new Server(server);
+
+socketProducts(socketServer)
+*/

@@ -80,8 +80,8 @@ generateId = async () => {
 
   //CREATE
   addProduct = async (obj) => {
-    const {title, description, price, thumbnail,category,status=true, code, stock}=obj
-    if (!title || !description || !price || !category || !code ||!status || !stock) {
+    const {title, description, price, thumbnail,category, code, stock}=obj
+    if (!title || !description || !price || !category || !code|| !stock) {
       console.error("INGRESE TODOS LOS DATOS DEL PRODUCTO")
       return
     } else {
@@ -100,7 +100,6 @@ generateId = async () => {
           description,
           price,
           category,
-          status,
           thumbnail,
           code,
           stock,
@@ -116,8 +115,8 @@ generateId = async () => {
   //UPDATE
   updateProduct = async (id,obj) => {
     const {pid}=id
-    const {title, description, price, category,thumbnail, status,code, stock}=obj
-        if(title===undefined || description===undefined || price===undefined || category===undefined || status===undefined || code===undefined||stock===undefined){
+    const {title, description, price, category,thumbnail, code, stock}=obj
+        if(title===undefined || description===undefined || price===undefined || category===undefined ||code===undefined||stock===undefined){
       console.error("INGRESE TODOS LOS DATOS DEL PRODUCTO PARA SU ACTUALIZACION")
       return
     } else {
@@ -138,7 +137,6 @@ generateId = async () => {
                       description,
                       price,
                       category,
-                      status,
                       thumbnail,
                       code,
                       stock

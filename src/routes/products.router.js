@@ -1,73 +1,35 @@
-import uploader from "../../utils.js";
-import express from 'express';
+import {Router} from "express"
 import ProductManager from "../ProductManager.js";
-import { engine } from 'express-handlebars';
+import { __dirname } from "../../utils.js";
 
+const manager = new ProductManager("../bbdd.json");
 
-const app = express();
-const productMngr = new ProductManager("../bbdd.json");
+const routerP =Router()
 
-app.engine('handlebars', engine());
-app.set('view engine', 'handlebars');
-app.set('views', './views');
+routerP.get("/products",async(req,res)=>{
+    const products= await manager.getProducts(req.query)
+    res.json({products})
+})
 
-app.get('/realTimeProducts', async (req, res) => {
-    try {
-        const productos = await productMngr.getProducts();
-        res.render('home', { productos, length: productos.length > 0 });
-    } catch (error) {
-        res.status(500).json({ error: 'Error al obtener los productos' });
-    }
-});
+routerP.get("/products/:pid", async (req, res) => {
+    const productfind = await manager.getProductbyId(req.params)
+    res.json({ status: "success", productfind })
+})
 
-app.get('/', async (req, res) => {
-    try {
-        const limit = parseInt(req.query.limit);
-        let products = await productMngr.getProducts();
-        if (!isNaN(limit) && limit > 0) {
-            products = products.slice(0, limit);
-        }
-        res.status(200).json(products);
-    } catch (error) {
-        res.status(500).json({ error: 'Error al obtener los productos' });
-    }
-});
+routerP.post("/products", async (req, res) => {
+    const newproduct = await manager.addProduct(req.body);
+    res.json({ status: "success", newproduct })
+})
 
-app.get('/:pid', async (req, res) => {
-    try {
-        const pid = parseInt(req.params.pid);
-        const producto = await productMngr.getProductById(pid);
-        res.json(producto);
-    } catch (error) {
-        res.status(500).send(error.message);
-    }
-});
+routerP.put("/products/:pid", async (req, res) => {
+    const updatedproduct = await manager.updateProduct(req.params,req.body)
+    res.json({ status: "success", updatedproduct })
+})
 
-app.post('/', uploader.single('file'), async (req, res) => {
-    try {
-        await productMngr.addProduct(req.body.code, req.body.title, req.body.description, req.body.price, (req.file ? [req.file.filename] : []), req.body.stock, req.body.category);
-        res.send("Producto agregado con éxito...");
-    } catch (error) {
-        res.status(500).send(error.message);
-    }
-});
+routerP.delete("/products/:pid", async (req, res) => {
+    const id=parseInt(req.params.pid)
+    const deleteproduct = await manager.deleteProduct(id)
+    res.json({ status: "success",deleteproduct })
+})
 
-app.put('/:pid', async (req, res) => {
-    try {
-        await productMngr.updateProduct(parseInt(req.params.pid), req.body.obj, req.body.campo, req.body.valor);
-        res.send("Producto actualizado con éxito...");
-    } catch (error) {
-        res.status(500).send("Error: " + error.message);
-    }
-});
-
-router.delete('/:pid', async (req, res) => {
-    try {
-        await productMngr.deleteProduct(parseInt(req.params.pid));
-        res.send("Producto eliminado con éxito...");
-    } catch (error) {
-        res.status(500).send(error.message);
-    }
-});
-
-export default router;
+export default routerP
