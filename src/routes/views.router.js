@@ -13,8 +13,8 @@ routerV.get("/",async(req,res)=>{
     res.render("home",{listadeproductos})
 })
 
-routerV.get("/realtimeproducts",(req,res)=>{
-    res.render("realtimeproducts")
+routerV.get("/realTimeProducts",(req,res)=>{
+    res.render("realTimeProducts")
     })
     
     export default routerV
