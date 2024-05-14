@@ -43,5 +43,15 @@
     "thumbnail": "NP001",
     "code": 10,
     "stock": "Electrónicos"
+  },
+  {
+    "id": 6,
+    "title": "Perico",
+    "description": "Pericote mortal - Raquetazo",
+    "price": "150",
+    "category": "consumo",
+    "thumbnail": "raquetazo image",
+    "code": "abc123",
+    "stock": "20"
   }
 ]

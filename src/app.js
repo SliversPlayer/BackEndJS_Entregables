@@ -9,8 +9,8 @@ import socketProducts from "./listener/socketProducts.js"
 
 const app = express()
 const PORT=8080
-
-app.use(express.static(__dirname + "/public"))
+//Modificado según indicación de WM
+app.use(express.static(__dirname + "/src/public"))
 //handlebars
 app.engine("handlebars",handlebars.engine())
 app.set("views", __dirname+"/src/views")
